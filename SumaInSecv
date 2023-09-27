@@ -1,0 +1,40 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int v[101],st,dr,n,k,i;
+
+int main()
+{
+    ifstream fin("sumainsecv.in");
+    ofstream fout("sumainsecv.out");
+    
+    fin>>n>>k;
+    for(i=1;i<=n;i++)
+    {
+        fin>>v[i];
+        v[i]=v[i]+v[i-1];
+    }
+    st=1;dr=1;
+    while(st<=n)
+    {
+        while(k>v[dr]-v[st-1])
+        {
+            dr++;
+        }
+        while(k<v[dr]-v[st-1])
+        {
+            st++;
+        }
+        if(k==v[dr]-v[st-1])
+        {
+            fout<<st<<" "<<dr;
+            break;
+        }
+    }
+    if(st==n)
+    {
+        fout<<0<<" "<<0;
+    }
+    return 0;
+}
